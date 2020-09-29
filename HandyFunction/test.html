@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <p></p>
+    <script>
+	    // test code start//
+		var nextWord = function (oriArray,clickedFlower){
+			var newArray = [clickedFlower];
+			var len = newArray.length
+			oriArray.pop(clickedFlower);
+			var minFlower;
+			var collect = {};
+			var leng = oriArray.length - 1;
+			while (leng !== 0){
+				for (let i in oriArray){
+					if (i !== undefined){
+						var strIndex = 0;
+				
+						if (i === 3){
+							return i;
+						}
+						var dif = oriArray[i].charCodeAt(strIndex) - newArray[len - 1].charCodeAt(strIndex);
+						while (dif in collect === true){
+							dif = oriArray[i].charCodeAt(strIndex + 1) - newArray[len - 1].charCodeAt(strIndex + 1);
+						}
+						collect[dif] = oriArray[i];
+					}
+				}
+	
+				var min = 0;
+				for (let j in collect){
+					if (Number(j) >= 0 && Number(j) <= min){
+						min = Number(j);
+						closeFlower = collect[j];
+					}
+				}
+
+				newArray.push(closeFlower);
+				leng -= 1;
+				oriArray.pop(closeFlower);
+			}
+
+		return newArray;
+		};
+		flowers = ['daffodil','cherryblossom','lily','daisy','sunflower','tulip','rose','waterlily'];
+		var testdata = nextWord(flowers,'Lily'));
+		//test code end//
+		var para = document.getElementsByTagName("p");
+		var t = document.createTextNode(testdata);
+		para.appendChild(t);
+    </script>
+</body>
+</html>
+

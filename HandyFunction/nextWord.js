@@ -1,9 +1,8 @@
-// JavaScript source code
 var nextWord = function (oriArray,clickedFlower){
-	var newArray = [clicked Flower];
-	var len = newArray.length
+	var newArray = [clickedFlower];
+	var len = newArray.length;
 	oriArray.pop(clickedFlower);
-	var minFlower;
+	var minFlower; // ?
 	var collect = {};
 	var leng = oriArray.length - 1;
 	while (leng !== 0){
@@ -11,25 +10,30 @@ var nextWord = function (oriArray,clickedFlower){
 			if (i !== undefined){
 			    var strIndex = 0;
 				var dif = oriArray[i].charCodeAt(strIndex) - newArray[len - 1].charCodeAt(strIndex);
-				while (dif in collect === true){
-					dif = oriArray[i].charCodeAt(strIndex + 1) - newArray[len - 1].charCodeAt(strIndex + 1);
-				}
-				collect[dif] = oriArray[i];
-			}
+                if (dif > 0){
+				  while (dif in collect){
+                    strIndex += 1;
+					dif = oriArray[i].charCodeAt(strIndex) - newArray[len - 1].charCodeAt(strIndex);
+				  }
+				  collect[dif] = oriArray[i];
+			  }
+            }
 		}
 	
-		var min = 0;
+		var min = 99999;
 		for (let j in collect){
-			if (Number(j) >= 0 && Number(j) <= min){
+			if (Number(j) <= min){
 				min = Number(j);
-				closeFlower = collect[j];
+				closestFlower = collect[j];
 			}
 		}
 
-		newArray.push(closeFlower);
+		newArray.push(closestFlower);
 		leng -= 1;
-		oriArray.pop(closeFlower);
+		oriArray.pop(closestFlower);
 	}
 
 	return newArray;
 };
+flowers = ['daffodil','cherryblossom','lily','daisy','sunflower','tulip','rose','waterlily'];
+console.log(nextWord(flowers,'lily'));
